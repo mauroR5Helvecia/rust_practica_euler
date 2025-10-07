@@ -1,3 +1,4 @@
+
 pub fn suma_multiplos_5_and_9 (number: u32){
 
 
@@ -59,5 +60,45 @@ pub fn suma_pares_fibonacci_hasta_4milliones(limite: u64) -> Vec<u64>{
     
 
     return _fibonnacci_pares;
+}
+
+
+
+// Problem3
+pub fn calcular_numero_primo_mayor (mut n: u64) -> Vec<u64>{
+
+let mut factores = Vec::new();
+let mut divisor = 2;
+
+// Un punto importante aca es saber que un numero puede ser descompuestro en la multipli
+// cacion de numeros primos. 
+// De la siguiente manera, dividis el numero / 2 y si da 0 se continua sobre 2 dividiendo
+//  y cuando da distintoa 0 ahi se avanza a 3 y asi susecivamente hasta que el modulo da distinto de 0
+
+
+// Si n es menor que 1 no sigue 
+while n > 1 {
+    while n % divisor == 0 {
+        
+        factores.push(divisor);
+        n/=divisor;
+
+       
+
+    }
+     if divisor == 2{
+            divisor = 3;
+
+        }else {
+            divisor += 2;
+        }    
+
+
+
+}
+
+
+
+factores
 }
 

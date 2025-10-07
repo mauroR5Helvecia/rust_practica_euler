@@ -16,9 +16,21 @@ fn main() {
 
 let _numero_ejemp2 = 4000000;
 let imprimir_secuencia: Vec<u64>=ejercicios_1_al_5::suma_pares_fibonacci_hasta_4milliones(_numero_ejemp2);
-println!("La secuencia fibonacci de numeros pares es {:?}", imprimir_secuencia )
+println!("La secuencia fibonacci de numeros pares es {:?}", imprimir_secuencia );
 
 
+
+// Voy a probar en el main problem 3 
+println!("Problem 3");
+
+let numbber_problem3 = 600851475143;
+
+let vectores_primosej3: Vec<u64>= ejercicios_1_al_5::calcular_numero_primo_mayor(numbber_problem3);
+
+println!("Los numeros primos son {:?}", vectores_primosej3);
+// Los numeros primos son [71, 839, 1471, 6857]
+
+println!("El mayor de los primos es: (Lo sabemos usando el metodo .last) {:?}", vectores_primosej3.last().unwrap());
 
 
 
