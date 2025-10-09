@@ -30,8 +30,20 @@ let vectores_primosej3: Vec<u64>= ejercicios_1_al_5::calcular_numero_primo_mayor
 println!("Los numeros primos son {:?}", vectores_primosej3);
 // Los numeros primos son [71, 839, 1471, 6857]
 
-println!("El mayor de los primos es: (Lo sabemos usando el metodo .last) {:?}", vectores_primosej3.last().unwrap());
+// println!("El mayor de los primos es: (Lo sabemos usando el metodo .last) {:?}", vectores_primosej3.last().unwrap());
+// La linea de arriba muestra bien, pero al querer sacar el some, veo que existe una manera segura de trabajar el None en caso vacio y es
+match vectores_primosej3.last().copied() {
+    Some(mayor)=>println!("El numero mayor es este {}", mayor),
+    None=>println!("El vector esta vacio"),
+    // Cuando se prueba con 0, muestra el mensaje vacio
+    // match permite bindear la variable vectores_primosej3, por lo que llamamos mayor podria ser llamado de la forma que queramos
+}
 
-
+// problem4
+println!("Problema numero 4");
+   let (a, b, p, c) = ejercicios_1_al_5::palindromo_mayor_3_digitos_trazado();
+    println!("RESULTADO 3 digitos");
+    println!("Mayor palindromo: {} = {}×{}", p, a, b);
+    println!("Productos chequeados: {}", c);
 
 }

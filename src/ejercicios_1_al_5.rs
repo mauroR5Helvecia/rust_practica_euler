@@ -102,3 +102,62 @@ while n > 1 {
 factores
 }
 
+// Chequea si un numero es palíndromo usando aritmetica
+fn es_palindromo(mut n: u32) -> bool {
+    let original = n;
+    let mut rev = 0;
+
+    while n > 0 {
+        rev = rev * 10 + (n % 10); // agrego el ultimo dugito de n al final de rev
+        n /= 10;                   // saco el ultimo dígito de n
+    }
+
+    original == rev
+}
+
+// Busca el mayor palindromo como producto de dos números de 3 digitos.
+// Devuelve (a, b, producto, cantidad_de_chequeos).
+pub fn palindromo_mayor_3_digitos_trazado() -> (u32, u32, u32, u64) {
+    let mut mejor_prod: u32 = 0;
+    let mut mejor_a: u32 = 0;
+    let mut mejor_b: u32 = 0;
+    let mut chequeos: u64 = 0;
+
+    // Recorremos de 999 hacia 100 (valores grandes primero)
+    for a in (100..=999).rev() {
+        // Poda por fila: si ni el mejor caso (a * 999) supera al record, terminamos
+        let tope_fila = a * 999;
+        if tope_fila <= mejor_prod {
+            println!("No se puede superar el record actual ({}). Corto en a = {}.", mejor_prod, a);
+            break;
+        }
+
+        // Por simetria, b ≤ a (evita duplicar trabajo)
+        for b in (100..=a).rev() {
+            let prod = a * b;
+            chequeos += 1;
+
+            // Como b baja, prod tambien baja.
+            // Si ya no supera al record, corto esta fila no hace falta imprimir\
+            if prod <= mejor_prod {
+                break;
+            }
+
+            // Si es palindromo y mejora el record, guardamos y mostramos
+            if es_palindromo(prod) {
+                mejor_prod = prod;
+                mejor_a = a;
+                mejor_b = b;
+                println!("Nuevo palindromo mayor: {} = {} × {}", mejor_prod, mejor_a, mejor_b);
+            }
+        }
+    }
+
+    // Resumen final
+    println!(
+        "Mayor palindromo: {} = {} × {} (chequeos: {})",
+        mejor_prod, mejor_a, mejor_b, chequeos
+    );
+
+    (mejor_a, mejor_b, mejor_prod, chequeos)
+}
